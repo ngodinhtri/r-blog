@@ -1,1 +1,17 @@
-export const theme = {};
+export const theme = {
+  oldLace: "#fef6e4",
+  oxfordBlue: "#001858",
+  indigo: "#172c66",
+  pink: "#f582ae",
+  dutchWhite: "#f3d2c1",
+  skyBlue: "#8bd3dd",
+  bgColor: theme.oldLace,
+  headLineColor: theme.oxfordBlue,
+  textColor: theme.indigo,
+  buttonColor: theme.pink,
+  strokeColor: theme.oxfordBlue,
+  mainColor: theme.dutchWhite,
+  highLight: theme.oldLace,
+  secondary: theme.skyBlue,
+  tertiary: theme.pink,
+};
