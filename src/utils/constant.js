@@ -1,17 +1,20 @@
-export const theme = {
+const light = {
   oldLace: "#fef6e4",
   oxfordBlue: "#001858",
   indigo: "#172c66",
   pink: "#f582ae",
   dutchWhite: "#f3d2c1",
   skyBlue: "#8bd3dd",
-  bgColor: theme.oldLace,
-  headLineColor: theme.oxfordBlue,
-  textColor: theme.indigo,
-  buttonColor: theme.pink,
-  strokeColor: theme.oxfordBlue,
-  mainColor: theme.dutchWhite,
-  highLight: theme.oldLace,
-  secondary: theme.skyBlue,
-  tertiary: theme.pink,
+};
+
+export const themeLight = {
+  bgColor: light.oldLace,
+  headLineColor: light.oxfordBlue,
+  textColor: light.indigo,
+  buttonColor: light.pink,
+  strokeColor: light.oxfordBlue,
+  mainColor: light.dutchWhite,
+  highLight: light.oldLace,
+  secondary: light.skyBlue,
+  tertiary: light.pink,
 };
