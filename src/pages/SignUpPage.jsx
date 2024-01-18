@@ -3,7 +3,8 @@ import logo from "@/assets/logo.svg";
 import { Label } from "@/components/label";
 import { Input } from "@/components/input";
 import { useForm } from "react-hook-form";
-import { SearchIconSVG } from "@/assets/icons/index.js";
+import { Field } from "@/components/field";
+import { Button } from "@/components/button";
 
 const SignUpPageStyles = styled.div`
   height: 100dvh;
@@ -25,12 +26,6 @@ const SignUpPageStyles = styled.div`
     max-width: 800px;
     margin: 0 auto;
   }
-
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
 `;
 
 export default function SignUpPage() {
@@ -38,23 +33,35 @@ export default function SignUpPage() {
     control,
     handleSubmit,
     formState: { isValid, isSubmitting, errors },
+    reset,
   } = useForm({});
 
-  function handleOnSubmit() {}
+  function handleOnSubmit(values) {
+    if (!isValid) return;
+
+    return new Promise((resolve) => setTimeout(() => resolve(), 5000));
+  }
 
   return (
     <SignUpPageStyles>
       <img src={logo} alt="logo" className={"logo"} />
       <h1>R - Blog</h1>
-      <form>
-        <div className="field" onSubmit={handleSubmit(handleOnSubmit)}>
+      <form onSubmit={handleSubmit(handleOnSubmit)}>
+        <Field>
           <Label htmlFor="fullname">Fullname</Label>
           <Input
             name="fullname"
             placeholder="Enter your fullname"
             control={control}
           />
-        </div>
+        </Field>
+        <Button
+          isLoading={isSubmitting}
+          type={"submit"}
+          style={{ maxWidth: "33%", margin: "0 auto" }}
+        >
+          Sign Up
+        </Button>
       </form>
     </SignUpPageStyles>
   );

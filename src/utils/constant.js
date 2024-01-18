@@ -5,6 +5,7 @@ const light = {
   pink: "#f582ae",
   dutchWhite: "#f3d2c1",
   skyBlue: "#8bd3dd",
+  grey: "#b6bbc4",
 };
 
 export const themeLight = {
@@ -17,4 +18,5 @@ export const themeLight = {
   highLight: light.oldLace,
   secondary: light.skyBlue,
   tertiary: light.pink,
+  disabled: light.grey,
 };
