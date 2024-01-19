@@ -12,6 +12,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "@/firebase/firebase-config.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext.jsx";
 
 const validationSchema = Yup.object({
   fullname: Yup.string()
@@ -50,6 +51,10 @@ const SignUpPageStyles = styled.div`
 
 export default function SignUpPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
+  if (user) navigate("/");
+
   const {
     control,
     handleSubmit,
@@ -77,6 +82,7 @@ export default function SignUpPage() {
       reset();
     } catch (e) {
       toast.error(e.message);
+      console.log(e.message);
     }
   }
 
