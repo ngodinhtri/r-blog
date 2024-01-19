@@ -31,8 +31,8 @@ const InputStyles = styled.div`
 const InputIconStyles = styled.div`
   & > * {
     margin-right: 25px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
   }
 `;
 
