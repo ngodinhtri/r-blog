@@ -4,6 +4,7 @@ import { useController } from "react-hook-form";
 
 const InputStyles = styled.div`
     display: flex;
+    height: 54px;
     align-items: center;
     border: transparent 2px solid;
     border-radius: 8px;
