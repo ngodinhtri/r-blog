@@ -7,6 +7,11 @@ import { Field } from "@/components/field";
 import { Button } from "@/components/button";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "@/firebase/firebase-config.js";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
   fullname: Yup.string()
@@ -44,6 +49,7 @@ const SignUpPageStyles = styled.div`
 `;
 
 export default function SignUpPage() {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -51,10 +57,27 @@ export default function SignUpPage() {
     reset,
   } = useForm({ resolver: yupResolver(validationSchema) });
 
-  function handleOnSubmit(values) {
+  async function handleOnSubmit(values) {
     if (!isValid) return;
+    const { fullname, email, password } = values;
 
-    return new Promise((resolve) => setTimeout(() => resolve(), 5000));
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser, { displayName: fullname });
+
+      const colRef = collection(db, "users");
+      await addDoc(colRef, {
+        fullname,
+        email,
+        password,
+      });
+
+      toast.success("Signed up successfully! 🎉");
+      navigate("/");
+      reset();
+    } catch (e) {
+      toast.error(e.message);
+    }
   }
 
   return (
