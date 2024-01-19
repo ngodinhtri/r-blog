@@ -1,5 +1,5 @@
 import { Label } from "@/components/label";
-import { Input } from "@/components/input";
+import { InputForm } from "@/components/input";
 import { useForm } from "react-hook-form";
 import { Field } from "@/components/field";
 import { Button } from "@/components/button";
@@ -59,7 +59,7 @@ export default function SignUpPage() {
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         <Field error={errors.fullname}>
           <Label htmlFor="fullname">Fullname</Label>
-          <Input
+          <InputForm
             name="fullname"
             placeholder="Enter your fullname"
             control={control}
@@ -67,7 +67,7 @@ export default function SignUpPage() {
         </Field>
         <Field error={errors.email}>
           <Label htmlFor="email">Email</Label>
-          <Input
+          <InputForm
             type={"email"}
             name="email"
             placeholder="Enter your emnail"
@@ -76,7 +76,7 @@ export default function SignUpPage() {
         </Field>
         <Field error={errors.password}>
           <Label htmlFor="password">Password</Label>
-          <Input
+          <InputForm
             type={"password"}
             name="password"
             placeholder="Enter your password"

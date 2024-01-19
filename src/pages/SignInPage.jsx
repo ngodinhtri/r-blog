@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Field } from "@/components/field";
 import { Label } from "@/components/label";
-import { Input } from "@/components/input";
+import { InputForm } from "@/components/input";
 import { Button } from "@/components/button";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/firebase-config.js";
@@ -47,7 +47,7 @@ export default function SignInPage() {
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         <Field error={errors.email}>
           <Label htmlFor="email">Email</Label>
-          <Input
+          <InputForm
             type={"email"}
             name="email"
             placeholder="Enter your emnail"
@@ -56,7 +56,7 @@ export default function SignInPage() {
         </Field>
         <Field error={errors.password}>
           <Label htmlFor="password">Password</Label>
-          <Input
+          <InputForm
             type={"password"}
             name="password"
             placeholder="Enter your password"

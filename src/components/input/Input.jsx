@@ -36,7 +36,22 @@ const InputIconStyles = styled.div`
   }
 `;
 
-export function Input({ name, type = "text", control, children, ...props }) {
+export function Input({ name, type = "text", children, ...props }) {
+  return (
+    <InputStyles $hasIcon={!!children}>
+      <input type={type} id={name} {...props} />
+      <InputIconStyles>{children}</InputIconStyles>
+    </InputStyles>
+  );
+}
+
+export function InputForm({
+  name,
+  type = "text",
+  control,
+  children,
+  ...props
+}) {
   const { field } = useController({ name, control, defaultValue: "" });
 
   return (
@@ -48,6 +63,12 @@ export function Input({ name, type = "text", control, children, ...props }) {
 }
 
 Input.propTypes = {
+  name: PropTypes.string,
+  type: PropTypes.string,
+  children: PropTypes.node,
+};
+
+InputForm.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   control: PropTypes.object,

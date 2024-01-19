@@ -1,3 +1,3 @@
-import { Input } from "@/components/input/Input.jsx";
+import { Input, InputForm } from "@/components/input/Input.jsx";
 
-export { Input };
+export { Input, InputForm };
