@@ -5,6 +5,9 @@ import PropTypes from "prop-types";
 const ButtonStyles = styled.button`
   height: ${(props) => props.height || "54px"};
   width: ${(props) => props.width || "100%"};
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
 
   &:disabled {
     background-color: ${(props) => props.theme.disabled};

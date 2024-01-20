@@ -17,8 +17,8 @@ export const GlobalClasses = css`
     padding: 0 20px;
     cursor: pointer;
     border-radius: 8px;
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 500;
     line-height: 1;
   }
 `;
