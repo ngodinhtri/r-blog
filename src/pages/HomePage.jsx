@@ -1,19 +1,12 @@
 import styled from "styled-components";
-import { Header } from "@/layouts/index.js";
 import { Banner } from "@/components/banner";
 import { useEffect } from "react";
 import FeaturePostCard from "@/components/post/FeaturePostCard.jsx";
 import PostCard from "@/components/post/PostCard.jsx";
+import { Heading } from "@/components/heading/index.js";
 
 const HomeStyles = styled.div`
   padding-bottom: 100px;
-
-  .home-title {
-    margin-top: 60px;
-    margin-bottom: 30px;
-    font-size: 28px;
-    font-weight: 600;
-  }
 
   .feature {
     display: grid;
@@ -59,13 +52,13 @@ export default function HomePage() {
   return (
     <HomeStyles>
       <Banner />
-      <h2 className={"home-title"}>Feature</h2>
+      <Heading>Feature</Heading>
       <div className="feature">
         <FeaturePostCard />
         <FeaturePostCard />
         <FeaturePostCard />
       </div>
-      <h2 className={"home-title"}>Newest update</h2>
+      <Heading>Newest update</Heading>
       <div className="newest">
         <div className="newest-post">
           <PostCard sizeTitle={"l"} sizeImage={"xl"} />
