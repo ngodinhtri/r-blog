@@ -58,7 +58,6 @@ export default function HomePage() {
   }, []);
   return (
     <HomeStyles>
-      <Header />
       <Banner />
       <h2 className={"home-title"}>Feature</h2>
       <div className="feature">
