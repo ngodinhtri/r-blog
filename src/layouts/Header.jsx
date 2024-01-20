@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { Input } from "@/components/input/index.js";
 import { SearchIconSVG } from "@/assets/icons/index.js";
+import { useAuth } from "@/contexts/AuthContext.jsx";
 
 const HeaderStyles = styled.div`
   display: flex;
@@ -37,7 +38,13 @@ const NavStyles = styled.div`
 
 const HeaderRightStyles = styled.div`
   display: flex;
+  align-items: center;
   gap: 20px;
+
+  .username {
+    color: ${(props) => props.theme.tertiary};
+    font-weight: 700;
+  }
 `;
 
 const navItemList = [
@@ -56,6 +63,8 @@ const navItemList = [
 ];
 
 export function Header() {
+  const { user } = useAuth();
+
   return (
     <HeaderStyles>
       <NavStyles>
@@ -71,16 +80,22 @@ export function Header() {
         </nav>
       </NavStyles>
       <HeaderRightStyles>
-        <Input placeholder={"Search posts"}>
+        <Input placeholder={"Search post"}>
           <SearchIconSVG />
         </Input>
-        <Link
-          to={"/sign-up"}
-          style={{ width: "190px", fontSize: "18px" }}
-          className={"button"}
-        >
-          Sign Up
-        </Link>
+        {!user ? (
+          <Link
+            to={"/sign-up"}
+            style={{ width: "190px", fontSize: "18px" }}
+            className={"button"}
+          >
+            Sign Up
+          </Link>
+        ) : (
+          <h3>
+            Welcome, <span className={"username"}>TU</span>
+          </h3>
+        )}
       </HeaderRightStyles>
     </HeaderStyles>
   );
