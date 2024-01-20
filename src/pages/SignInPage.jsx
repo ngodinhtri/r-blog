@@ -11,6 +11,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/firebase-config.js";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const validationSchema = Yup.object({
   email: validationField.email,
@@ -41,6 +42,10 @@ export default function SignInPage() {
       console.log(e.message);
     }
   }
+
+  useEffect(() => {
+    document.title = "Sign In";
+  }, []);
 
   return (
     <AuthPageLayout>

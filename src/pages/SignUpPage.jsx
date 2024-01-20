@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { AuthPageLayout } from "@/layouts";
 import { validationField } from "@/firebase/validationField.js";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const validationSchema = Yup.object({
   fullname: validationField.fullname,
@@ -53,6 +54,10 @@ export default function SignUpPage() {
       console.log(e.message);
     }
   }
+
+  useEffect(() => {
+    document.title = "Sign up";
+  }, []);
 
   return (
     <AuthPageLayout>
