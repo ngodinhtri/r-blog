@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import PropTypes from "prop-types";
+import PostQuote from "@/components/post/PostQuote.jsx";
 
 const PostImageStyles = styled.div`
   width: 100%;
@@ -22,7 +23,7 @@ const PostImageStyles = styled.div`
         size = "300px";
         break;
       case "sm":
-        size = "130px";
+        size = "150px";
         break;
       default:
         size = "200px";

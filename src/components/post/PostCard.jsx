@@ -7,6 +7,7 @@ const PostCardStyles = styled.div`
     display: flex;
     flex-direction: ${(props) =>
       props.$direction === "vertical" ? "column" : "row"};
+    align-items: center;
 
     .infos {
       display: flex;

@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SignInPage from "@/pages/SignInPage.jsx";
 import HomePage from "@/pages/HomePage.jsx";
 import MainLayout from "@/layouts/MainLayout.jsx";
+import PostDetailPage from "@/pages/PostDetailPage.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path={"/"} element={<MainLayout />}>
             <Route path={"/"} element={<HomePage />} />
+            <Route path={"/detail"} element={<PostDetailPage />} />
             <Route path={"/sign-up"} element={<SignUpPage />} />
             <Route path={"/sign-in"} element={<SignInPage />} />
           </Route>

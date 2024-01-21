@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 
 const PostTitleStyles = styled.h3`
   font-weight: 600;
-  line-height: 1;
+  line-height: 1.3;
 
   ${(props) => {
     let size;
     switch (props.$size) {
+      case "xl":
+        size = "36px";
+        break;
       case "l":
         size = "22px";
         break;
@@ -30,7 +33,7 @@ export default function PostTitle({ size = "md", children, className = "" }) {
 }
 
 PostTitle.propTypes = {
-  size: PropTypes.oneOf(["md", "l"]),
+  size: PropTypes.oneOf(["md", "l", "xl"]),
   children: PropTypes.node,
   className: PropTypes.string,
 };
