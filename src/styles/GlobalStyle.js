@@ -21,4 +21,10 @@ export const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         color: ${(props) => props.theme.tertiary};
     }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 `;
