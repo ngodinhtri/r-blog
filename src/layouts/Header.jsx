@@ -6,7 +6,7 @@ import { Input } from "@/components/input/index.js";
 import { SearchIconSVG } from "@/assets/icons/index.js";
 import { useAuth } from "@/contexts/AuthContext.jsx";
 
-const HeaderStyles = styled.div`
+const HeaderStyles = styled.header`
   display: flex;
   justify-content: space-between;
   height: 54px;
