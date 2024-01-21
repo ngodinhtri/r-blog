@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import banner from "@/assets/images/banner.png";
 import PropTypes from "prop-types";
+import { Button } from "@/components/button";
 
 const BannerStyles = styled.div`
   width: ${(props) => props.width || "100%"};
@@ -62,9 +62,9 @@ export function Banner({ title, desc, imgUrl }) {
           saepe voluptate? Accusamus accusantium aliquid blanditiis doloremque
           eius maxime, minus pariatur veniam.
         </p>
-        <Link to={"/"} className={"button"}>
+        <Button to={"/"} className={"button"}>
           Get started
-        </Link>
+        </Button>
       </div>
       <div className="banner-image">
         <img src={imgUrl ?? banner} alt="banner" />

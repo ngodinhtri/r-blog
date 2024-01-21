@@ -2,9 +2,10 @@ import styled from "styled-components";
 import logo from "@/assets/logo.svg";
 import { Link, NavLink } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { Input } from "@/components/input/index.js";
-import { SearchIconSVG } from "@/assets/icons/index.js";
+import { Input } from "@/components/input";
+import { SearchIconSVG } from "@/assets/icons";
 import { useAuth } from "@/contexts/AuthContext.jsx";
+import { Button } from "@/components/button";
 
 const HeaderStyles = styled.header`
   display: flex;
@@ -84,13 +85,13 @@ export function Header() {
           <SearchIconSVG />
         </Input>
         {!user ? (
-          <Link
+          <Button
             to={"/sign-up"}
             style={{ width: "190px", fontSize: "18px" }}
             className={"button"}
           >
             Sign Up
-          </Link>
+          </Button>
         ) : (
           <h3>
             Welcome, <span className={"username"}>TU</span>

@@ -97,7 +97,7 @@ export function SignUpPage() {
         </Button>
       </form>
       <div style={{ textAlign: "center", marginTop: "30px" }}>
-        Already have an account ? <Link to={"/sign-up"}>Sign in!</Link>
+        Already have an account ? <Link to={"/sign-in"}>Sign in!</Link>
       </div>
     </AuthPageLayout>
   );
