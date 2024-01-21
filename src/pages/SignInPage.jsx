@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
   password: validationField.password,
 });
 
-export default function SignInPage() {
+export function SignInPage() {
   const navigate = useNavigate();
 
   const {

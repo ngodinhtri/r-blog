@@ -1,7 +1,7 @@
-import { Header } from "@/layouts/Header.jsx";
+import { Header } from "@/layouts";
 import { Outlet } from "react-router-dom";
 
-export default function MainLayout() {
+export function MainLayout() {
   return (
     <>
       <Header />

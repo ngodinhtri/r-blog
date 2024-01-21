@@ -22,7 +22,7 @@ const PostDetailPageStyles = styled.div`
   }
 `;
 
-export default function PostDetailPage() {
+export function PostDetailPage() {
   return (
     <PostDetailPageStyles>
       <PostCard sizeImage={"xl"} sizeTitle={"xl"} direction={"horizon"} />

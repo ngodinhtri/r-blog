@@ -1,13 +1,10 @@
 import "./App.css";
 import { AuthProvider } from "@/contexts/AuthContext.jsx";
 import { Route, Routes } from "react-router-dom";
-import SignUpPage from "@/pages/SignUpPage.jsx";
+import { SignUpPage, HomePage, PostDetailPage, SignInPage } from "@/pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SignInPage from "@/pages/SignInPage.jsx";
-import HomePage from "@/pages/HomePage.jsx";
-import MainLayout from "@/layouts/MainLayout.jsx";
-import PostDetailPage from "@/pages/PostDetailPage.jsx";
+import { MainLayout } from "@/layouts";
 
 function App() {
   return (

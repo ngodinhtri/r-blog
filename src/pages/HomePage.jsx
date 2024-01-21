@@ -45,7 +45,7 @@ const HomeStyles = styled.div`
   }
 `;
 
-export default function HomePage() {
+export function HomePage() {
   useEffect(() => {
     document.title = "Home Page";
   }, []);
