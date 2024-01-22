@@ -1,9 +1,22 @@
 import styled from "styled-components";
 import { Post } from "@/components/post";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import { db } from "@/firebase/firebase-config.js";
+import { doc, getDoc } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { ImagePaths } from "@/firebase/ImagesPaths.js";
 
 const FeaturePostCardStyles = styled.div`
-  .post {
+  & .post {
     position: relative;
+
+    & .overlay {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      opacity: 0.6;
+    }
   }
 
   .intro {
@@ -31,26 +44,73 @@ const FeaturePostCardStyles = styled.div`
     }
   }
 `;
-export default function FeaturePostCard() {
+export default function FeaturePostCard({ post }) {
+  const [category, setCategory] = useState("");
+  const [author, setAuthor] = useState("");
+  const [imageUrl, setImageUrl] = useState(
+    "https://placehold.co/600x400?text=No+image",
+  );
+  const {
+    title,
+    category: categoryId,
+    author: authorId,
+    createdAt,
+    image,
+  } = post;
+
+  useEffect(() => {
+    (async () => {
+      const categoryRef = doc(db, "categories", categoryId);
+      const categorySnap = await getDoc(categoryRef);
+      // const authorRef = doc(db, "authors", authorId);
+      // const authorSnap = await getDoc(authorRef);
+
+      if (categorySnap.exists()) {
+        setCategory(categorySnap.data()?.name);
+      }
+
+      // if (authorSnap.exists()) {
+      //   setAuthor(authorSnap.data()?.name);
+      // }
+
+      // Create a reference to the file we want to download
+      const storage = getStorage();
+      const starsRef = ref(storage, `${ImagePaths.post}/${image}`);
+
+      // Get the download URL
+      getDownloadURL(starsRef)
+        .then((url) => {
+          setImageUrl(url);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    })();
+  }, []);
+
   return (
     <FeaturePostCardStyles>
       <Post>
-        <Post.Image
-          size={"l"}
-          url={
-            "https://images.unsplash.com/photo-1682685797365-41f45b562c0a?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-        />
+        <div className="overlay"></div>
+        <Post.Image size={"l"} url={imageUrl} />
         <div className="intro">
           <div className="top">
-            <Post.Tag>Kiến thức</Post.Tag>
-            <Post.Info />
+            <Post.Tag>{category}</Post.Tag>
+            <Post.Info
+              author={author}
+              date={new Intl.DateTimeFormat("en-US", {
+                month: "long",
+                day: "numeric",
+              }).format(new Date(createdAt))}
+            />
           </div>
-          <Post.Title>
-            Hướng dẫn setup phòng cực chill dành cho người mới toàn tập
-          </Post.Title>
+          <Post.Title>{title}</Post.Title>
         </div>
       </Post>
     </FeaturePostCardStyles>
   );
 }
+
+FeaturePostCard.propTypes = {
+  post: PropTypes.object,
+};

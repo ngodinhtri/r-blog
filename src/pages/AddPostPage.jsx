@@ -15,14 +15,13 @@ import { Controller, useForm } from "react-hook-form";
 import { Button } from "@/components/button/index.js";
 import slugify from "slugify";
 import uploadImageToFirebase from "@/firebase/uploadImageToFirebase.js";
-import { ImagePaths } from "@/firebase/ImagesPath.js";
+import { ImagePaths } from "@/firebase/ImagesPaths.js";
 import PostImage from "@/components/post/PostImage.jsx";
 import UploadSVG from "@/assets/icons/UploadSVG.jsx";
 import { useCategories } from "@/hooks/useCategories.js";
 import Select from "react-select";
-import { value } from "lodash/seq.js";
 import { toast } from "react-toastify";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config.js";
 import * as Yup from "yup";
 import { validationField } from "@/firebase/validationField.js";
@@ -98,6 +97,9 @@ export default function AddPostPage() {
       values.image = image ? image.file.name : "";
       if (image) uploadImageToFirebase(image.file, ImagePaths.post);
       values.category = values.category?.value;
+      values.status = Number(values.status);
+      values.createdAt = serverTimestamp();
+
       const colRef = collection(db, "posts");
       await addDoc(colRef, values);
       toast.success("Add post successfully! 🎉");

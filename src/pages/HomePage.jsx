@@ -1,18 +1,12 @@
 import styled from "styled-components";
 import { Banner } from "@/components/banner";
 import { useEffect } from "react";
-import FeaturePostCard from "@/components/post/FeaturePostCard.jsx";
 import PostCard from "@/components/post/PostCard.jsx";
 import { Heading } from "@/components/heading/index.js";
+import FeaturePostsHomePage from "@/pages/modules/home-pages/FeaturePostsHomePage.jsx";
 
 const HomeStyles = styled.div`
   padding-bottom: 100px;
-
-  .feature {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 50px;
-  }
 
   .newest {
     display: grid;
@@ -53,11 +47,7 @@ export function HomePage() {
     <HomeStyles>
       <Banner />
       <Heading>Feature</Heading>
-      <div className="feature">
-        <FeaturePostCard />
-        <FeaturePostCard />
-        <FeaturePostCard />
-      </div>
+      <FeaturePostsHomePage />
       <Heading>Newest update</Heading>
       <div className="newest">
         <div className="newest-post">
