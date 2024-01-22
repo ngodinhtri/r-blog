@@ -24,6 +24,13 @@ import { value } from "lodash/seq.js";
 import { toast } from "react-toastify";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config.js";
+import * as Yup from "yup";
+import { validationField } from "@/firebase/validationField.js";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const validationSchema = Yup.object({
+  title: validationField.title,
+});
 
 const AddPostPageStyles = styled.div`
   .form-main {
@@ -66,6 +73,7 @@ export default function AddPostPage() {
       image: "",
       hot: false,
     },
+    resolver: yupResolver(validationSchema),
   });
 
   const watchHot = watch("hot");
@@ -93,6 +101,8 @@ export default function AddPostPage() {
       const colRef = collection(db, "posts");
       await addDoc(colRef, values);
       toast.success("Add post successfully! 🎉");
+      reset();
+      setImage(null);
     } catch (e) {
       toast(e.message);
     }
@@ -106,7 +116,7 @@ export default function AddPostPage() {
       <Heading>Add new post</Heading>
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         <div className="form-main">
-          <Field>
+          <Field error={errors.title}>
             <Label htmlFor="title">Title</Label>
             <InputForm
               name="title"

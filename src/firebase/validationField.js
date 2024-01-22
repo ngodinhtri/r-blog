@@ -11,4 +11,7 @@ export const validationField = {
       /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/gm,
       "Password must contain 0-9, A-z & special letter. Length 8 - 16",
     ),
+  title: Yup.string()
+    .required("Required")
+    .max(250, "Must be 250 characters or less!"),
 };
