@@ -5,6 +5,8 @@ import { SignUpPage, HomePage, PostDetailPage, SignInPage } from "@/pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MainLayout, ManagePagesLayout } from "@/layouts";
+import DashboardPage from "@/pages/DashboardPage.jsx";
+import AddPostPage from "@/pages/AddPostPage.jsx";
 
 function App() {
   return (
@@ -17,7 +19,14 @@ function App() {
             <Route path={"/sign-up"} element={<SignUpPage />} />
             <Route path={"/sign-in"} element={<SignInPage />} />
           </Route>
-          <Route path={"/manage"} element={<ManagePagesLayout />}></Route>
+          <Route element={<ManagePagesLayout />}>
+            <Route path={"/manage/"} element={<DashboardPage />} />
+            <Route path={"/manage/dashboard"} element={<DashboardPage />} />
+            <Route path={"/manage/post"} element={<DashboardPage />} />
+            <Route path={"/manage/category"} element={<DashboardPage />} />
+            <Route path={"/manage/user"} element={<DashboardPage />} />
+            <Route path={"/manage/add-post"} element={<AddPostPage />} />
+          </Route>
         </Routes>
       </AuthProvider>
       <ToastContainer />

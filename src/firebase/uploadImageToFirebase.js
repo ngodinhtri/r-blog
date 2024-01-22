@@ -1,9 +1,4 @@
-import {
-  getDownloadURL,
-  getStorage,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { toast } from "react-toastify";
 
 export default function uploadImageToFirebase(file, path) {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { Button } from "@/components/button/index.js";
 import logo from "@/assets/logo.svg";
 import {
@@ -75,8 +75,12 @@ const ManagePagesLayoutStyles = styled.div`
         align-items: center;
         gap: 30px;
         border-radius: 8px;
-        padding: 4px 8px;
+        padding: 10px 8px;
         margin-bottom: 20px;
+
+        &.active {
+          background: ${(props) => props.theme.bgColor};
+        }
 
         .icon {
           width: 40px;
@@ -140,14 +144,14 @@ export function ManagePagesLayout() {
         </div>
         <div className={"menu"}>
           {menuList.map((menuItem) => (
-            <Link
+            <NavLink
               to={`/manage/${menuItem.to}`}
               key={uuidv4()}
-              className={"menu-item"}
+              className={isActiveMenuItem}
             >
               <div className="icon">{menuItem.icon}</div>
               <h4>{menuItem.title}</h4>
-            </Link>
+            </NavLink>
           ))}
         </div>
         {/*  Logout*/}
@@ -158,4 +162,8 @@ export function ManagePagesLayout() {
       </main>
     </ManagePagesLayoutStyles>
   );
+}
+
+function isActiveMenuItem({ isActive }) {
+  return isActive ? "active menu-item" : " menu-item";
 }
