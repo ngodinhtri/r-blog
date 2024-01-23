@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { Input } from "@/components/input";
 import { SearchIconSVG } from "@/assets/icons";
-import { useAuth } from "@/contexts/AuthContext.jsx";
+import { useAuth } from "@/contexts/useAuth.jsx";
 import { Button } from "@/components/button";
 
 const HeaderStyles = styled.header`
@@ -94,7 +94,7 @@ export function Header() {
           </Button>
         ) : (
           <h3>
-            Welcome, <span className={"username"}>TU</span>
+            Welcome, <span className={"username"}>{user.displayName}</span>
           </h3>
         )}
       </HeaderRightStyles>

@@ -22,16 +22,23 @@ import { useCategories } from "@/hooks/useCategories.js";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/firebase/firebase-config.js";
+import { auth, db } from "@/firebase/firebase-config.js";
 import * as Yup from "yup";
 import { validationField } from "@/firebase/validationField.js";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuth } from "@/contexts/useAuth.jsx";
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
 const validationSchema = Yup.object({
   title: validationField.title,
 });
 
 const AddPostPageStyles = styled.div`
+  h2 {
+    margin-top: 0;
+  }
+
   .form-main {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -54,6 +61,7 @@ const AddPostPageStyles = styled.div`
 export default function AddPostPage() {
   const [image, setImage] = useState(null);
   const { categories } = useCategories();
+  const { user } = useAuth(true);
 
   const {
     watch,
@@ -99,6 +107,7 @@ export default function AddPostPage() {
       values.category = values.category?.value;
       values.status = Number(values.status);
       values.createdAt = serverTimestamp();
+      values.author = user.uid;
 
       const colRef = collection(db, "posts");
       await addDoc(colRef, values);
@@ -113,6 +122,8 @@ export default function AddPostPage() {
   useEffect(() => {
     document.title = "Add new post";
   }, []);
+
+  if (user === null) return null;
   return (
     <AddPostPageStyles>
       <Heading>Add new post</Heading>

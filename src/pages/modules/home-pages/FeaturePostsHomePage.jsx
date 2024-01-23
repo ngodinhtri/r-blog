@@ -37,8 +37,6 @@ export default function FeaturePostsHomePage() {
     })();
   }, []);
 
-  console.log(posts);
-
   return (
     <FeaturePostsStyles>
       {posts &&

@@ -35,19 +35,21 @@ export function SignUpPage() {
     const { fullname, email, password } = values;
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
       await updateProfile(auth.currentUser, { displayName: fullname });
-
       const colRef = collection(db, "users");
       await addDoc(colRef, {
         fullname,
         email,
-        password,
+        uid: userCredential.user.uid,
       });
 
       toast.success("Signed up successfully! 🎉");
-      await auth.signOut();
-      navigate("/sign-in");
+      navigate("/");
       reset();
     } catch (e) {
       toast.error(e.code);

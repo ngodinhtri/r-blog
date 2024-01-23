@@ -1,7 +1,7 @@
 import logo from "@/assets/logo.svg";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useAuth } from "@/contexts/AuthContext.jsx";
+import { useAuth } from "@/contexts/useAuth.jsx";
 import { Navigate } from "react-router-dom";
 
 const AuthPageStyles = styled.div`
