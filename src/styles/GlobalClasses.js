@@ -21,4 +21,20 @@ export const GlobalClasses = css`
     font-weight: 500;
     line-height: 1;
   }
+
+  //    MATERIAL UI
+
+  .MuiMenu-list {
+    background: ${(props) => props.theme.bgColor};
+    border-radius: 8px;
+    color: ${(props) => props.theme.headLineColor};
+
+    & .MuiListItemIcon-root {
+      color: currentColor;
+    }
+
+    a {
+      color: currentColor;
+    }
+  }
 `;

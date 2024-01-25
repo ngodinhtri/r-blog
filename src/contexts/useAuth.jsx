@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function useAuth(isRequire) {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,8 +15,9 @@ export function useAuth(isRequire) {
         setUser(null);
         if (isRequire) navigate("/sign-in");
       }
+      setIsLoading(false);
     });
   }, []);
 
-  return { user };
+  return { user, isLoading };
 }

@@ -5,8 +5,8 @@ import { HomePage, PostDetailPage, SignInPage, SignUpPage } from "@/pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MainLayout, ManagePagesLayout } from "@/layouts";
-import DashboardPage from "@/pages/DashboardPage.jsx";
-import AddPostPage from "@/pages/AddPostPage.jsx";
+import DashboardPage from "@/pages/manage-pages/DashboardPage.jsx";
+import AddPostPage from "@/pages/manage-pages/AddPostPage.jsx";
 
 function App() {
   return (

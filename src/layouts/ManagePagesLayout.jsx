@@ -1,13 +1,11 @@
 import styled from "styled-components";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { Button } from "@/components/button/index.js";
 import logo from "@/assets/logo.svg";
 import { ArchiveBoxSVG, BookSVG, CubeSVG, UserSVG } from "@/assets/icons";
 import { v4 as uuidv4 } from "uuid";
-import { auth } from "@/firebase/firebase-config.js";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { useAuth } from "@/contexts/useAuth.jsx";
+import { signOut } from "@/firebase/firebase-config.js";
+import { AccountMenu } from "@/components/menu/index.js";
 
 const ManagePagesLayoutStyles = styled.div`
   display: grid;
@@ -153,7 +151,7 @@ export function ManagePagesLayout() {
           ))}
         </div>
         {/*  Logout*/}
-        <Button onClick={() => console.log(auth.signOut())}>Log out</Button>
+        <Button onClick={signOut}>Log out</Button>
       </aside>
       <main>
         <Outlet />

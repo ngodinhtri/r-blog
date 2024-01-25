@@ -34,7 +34,7 @@ export function SignInPage() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      toast.success("Signed in successfully! 🎉");
+      toast.success("Signed in successfully! 🎉", { autoClose: 800 });
       navigate("/");
       reset();
     } catch (e) {

@@ -43,6 +43,7 @@ export function HomePage() {
   useEffect(() => {
     document.title = "Home Page";
   }, []);
+
   return (
     <HomeStyles>
       <Banner />

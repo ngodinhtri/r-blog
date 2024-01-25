@@ -6,6 +6,9 @@ import { Input } from "@/components/input";
 import { SearchIconSVG } from "@/assets/icons";
 import { useAuth } from "@/contexts/useAuth.jsx";
 import { Button } from "@/components/button";
+import { LoadingSpinner } from "@/components/loading/index.js";
+import { AccountMenu } from "@/components/menu/index.js";
+import { useRef } from "react";
 
 const HeaderStyles = styled.header`
   display: flex;
@@ -43,8 +46,12 @@ const HeaderRightStyles = styled.div`
   gap: 20px;
 
   .username {
-    color: ${(props) => props.theme.tertiary};
-    font-weight: 700;
+    cursor: pointer;
+
+    span {
+      color: ${(props) => props.theme.tertiary};
+      font-weight: 700;
+    }
   }
 `;
 
@@ -64,7 +71,8 @@ const navItemList = [
 ];
 
 export function Header() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
+  const accountMenuRef = useRef(null);
 
   return (
     <HeaderStyles>
@@ -84,7 +92,9 @@ export function Header() {
         <Input placeholder={"Search post"}>
           <SearchIconSVG />
         </Input>
-        {!user ? (
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : !user ? (
           <Button
             to={"/sign-up"}
             style={{ width: "190px", fontSize: "18px" }}
@@ -93,9 +103,12 @@ export function Header() {
             Sign Up
           </Button>
         ) : (
-          <h3>
-            Welcome, <span className={"username"}>{user.displayName}</span>
-          </h3>
+          <>
+            <h3 className={"username"} id={"greeting"}>
+              Welcome, <span>{user.displayName}</span>
+            </h3>
+            <AccountMenu anchorId={"greeting"} />
+          </>
         )}
       </HeaderRightStyles>
     </HeaderStyles>

@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Heading } from "@/components/heading";
-import { Label } from "@/components/label";
-import { InputForm } from "@/components/input";
-import { Field } from "@/components/field";
+import { Heading } from "@/components/heading/index.js";
+import { Label } from "@/components/label/index.js";
+import { InputForm } from "@/components/input/index.js";
+import { Field } from "@/components/field/index.js";
 import {
   FormControlLabel,
   Radio,
@@ -22,13 +22,11 @@ import { useCategories } from "@/hooks/useCategories.js";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { auth, db } from "@/firebase/firebase-config.js";
+import { db } from "@/firebase/firebase-config.js";
 import * as Yup from "yup";
 import { validationField } from "@/firebase/validationField.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "@/contexts/useAuth.jsx";
-import { useNavigate } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
 
 const validationSchema = Yup.object({
   title: validationField.title,

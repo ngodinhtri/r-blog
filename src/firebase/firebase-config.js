@@ -25,3 +25,7 @@ export const checkSigned = (signedInFunc, signedOutFunc) => {
     }
   });
 };
+
+export function signOut() {
+  auth.signOut();
+}
