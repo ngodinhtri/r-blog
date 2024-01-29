@@ -5,7 +5,6 @@ import logo from "@/assets/logo.svg";
 import { ArchiveBoxSVG, BookSVG, CubeSVG, UserSVG } from "@/assets/icons";
 import { v4 as uuidv4 } from "uuid";
 import { signOut } from "@/firebase/firebase-config.js";
-import { AccountMenu } from "@/components/menu/index.js";
 
 const ManagePagesLayoutStyles = styled.div`
   display: grid;
@@ -123,7 +122,7 @@ export function ManagePagesLayout() {
   return (
     <ManagePagesLayoutStyles>
       <header>
-        <Button to={"/manage"}>Write new post</Button>
+        <Button to={"/manage/add-post"}>Write new post</Button>
         <div className="avatar">
           <img
             src="https://plus.unsplash.com/premium_photo-1698161179423-f4ea29053074?q=80&w=1955&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

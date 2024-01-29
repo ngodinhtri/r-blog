@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAf0kl-nEESd0b7yFb8wyIJxc-MrdvemAc",
@@ -15,6 +16,7 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const realTimeDB = getDatabase();
 
 export const checkSigned = (signedInFunc, signedOutFunc) => {
   onAuthStateChanged(auth, (user) => {
@@ -25,6 +27,18 @@ export const checkSigned = (signedInFunc, signedOutFunc) => {
     }
   });
 };
+
+export async function getDocFromDB(collection, docId) {
+  const docRef = doc(db, collection, docId);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!");
+  }
+}
 
 export function signOut() {
   auth.signOut();

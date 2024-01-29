@@ -1,7 +1,14 @@
 import FeaturePostCard from "@/components/post/FeaturePostCard.jsx";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { collection, getDocs, limit, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  limit,
+  query,
+  where,
+  orderBy,
+} from "firebase/firestore";
 import { db } from "@/firebase/firebase-config.js";
 
 const FeaturePostsStyles = styled.div`
@@ -17,6 +24,7 @@ export default function FeaturePostsHomePage() {
     (async function getFeaturePosts() {
       const postsQuery = query(
         collection(db, "posts"),
+        orderBy("createdAt", "desc"),
         where("hot", "==", true),
         limit(3),
       );
@@ -29,7 +37,7 @@ export default function FeaturePostsHomePage() {
         newPosts.push({
           ...doc.data(),
           id: doc.id,
-          createdAt: doc.data()?.createdAt.seconds,
+          createdAt: Number(doc.data()?.createdAt.seconds) * 1000,
         });
       });
 

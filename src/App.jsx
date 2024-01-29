@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { MainLayout, ManagePagesLayout } from "@/layouts";
 import DashboardPage from "@/pages/manage-pages/DashboardPage.jsx";
 import AddPostPage from "@/pages/manage-pages/AddPostPage.jsx";
+import ManagePostsPage from "@/pages/manage-pages/ManagePostsPage.jsx";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route element={<ManagePagesLayout />}>
           <Route path={"/manage/"} element={<DashboardPage />} />
           <Route path={"/manage/dashboard"} element={<DashboardPage />} />
-          <Route path={"/manage/post"} element={<DashboardPage />} />
+          <Route path={"/manage/post"} element={<ManagePostsPage />} />
           <Route path={"/manage/category"} element={<DashboardPage />} />
           <Route path={"/manage/user"} element={<DashboardPage />} />
           <Route path={"/manage/add-post"} element={<AddPostPage />} />
