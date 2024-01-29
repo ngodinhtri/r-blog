@@ -8,6 +8,7 @@ import { MainLayout, ManagePagesLayout } from "@/layouts";
 import DashboardPage from "@/pages/manage-pages/DashboardPage.jsx";
 import AddPostPage from "@/pages/manage-pages/AddPostPage.jsx";
 import ManagePostsPage from "@/pages/manage-pages/ManagePostsPage.jsx";
+import AddCategoryPage from "@/pages/manage-pages/AddCategoryPage.jsx";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path={"/manage/category"} element={<DashboardPage />} />
           <Route path={"/manage/user"} element={<DashboardPage />} />
           <Route path={"/manage/add-post"} element={<AddPostPage />} />
+          <Route path={"/manage/add-category"} element={<AddCategoryPage />} />
         </Route>
       </Routes>
 

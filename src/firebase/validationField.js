@@ -14,4 +14,7 @@ export const validationField = {
   title: Yup.string()
     .required("Required")
     .max(250, "Must be 250 characters or less!"),
+  name: Yup.string()
+    .required("Required")
+    .max(20, "Must be 20 characters or less!"),
 };

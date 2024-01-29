@@ -11,7 +11,7 @@
 - userId
 - user: id, username, fullname, avatar, description
 - categoryId
-- category: id, name, slug
+    - category: id, name, slug
 
 # Category
 
