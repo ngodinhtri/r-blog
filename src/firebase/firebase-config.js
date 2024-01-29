@@ -1,5 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  or,
+  query,
+  where,
+} from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
@@ -38,6 +47,24 @@ export async function getDocFromDB(collection, docId) {
     // docSnap.data() will be undefined in this case
     console.log("No such document!");
   }
+}
+
+export async function isPostExisted(title, slug) {
+  const q = query(
+    collection(db, "posts"),
+    or(where("title", "==", title), where("slug", "==", slug)),
+  );
+  const docSnaps = await getDocs(q);
+  if (!docSnaps.empty) throw new Error("Title or slug is existed");
+}
+
+export async function isCategoryExisted(name, slug) {
+  const q = query(
+    collection(db, "categories"),
+    or(where("name", "==", name), where("slug", "==", slug)),
+  );
+  const docSnaps = await getDocs(q);
+  if (!docSnaps.empty) throw new Error("Name or slug is existed");
 }
 
 export function signOut() {

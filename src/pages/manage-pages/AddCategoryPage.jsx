@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { validationField } from "@/firebase/validationField.js";
 import slugify from "slugify";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/firebase/firebase-config.js";
+import { db, isCategoryExisted } from "@/firebase/firebase-config.js";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
@@ -48,7 +48,10 @@ export default function AddCategoryPage() {
   async function handleOnSubmit(values) {
     if (!isValid) return;
     try {
-      values.slug = slugify(values.slug || values.name);
+      values.slug = slugify(values.slug || values.name, { lower: true });
+
+      await isCategoryExisted(values.name, values.slug);
+
       values.status = Number(values.status);
       values.createdAt = serverTimestamp();
 
@@ -57,7 +60,7 @@ export default function AddCategoryPage() {
       toast.success("Add category successfully! 🎉");
       reset();
     } catch (e) {
-      toast(e.message);
+      toast.error(e.message);
     }
   }
 

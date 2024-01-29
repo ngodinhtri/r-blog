@@ -22,7 +22,7 @@ import { useCategories } from "@/hooks/useCategories.js";
 import Select from "react-select";
 import { toast } from "react-toastify";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "@/firebase/firebase-config.js";
+import { db, isPostExisted } from "@/firebase/firebase-config.js";
 import * as Yup from "yup";
 import { validationField } from "@/firebase/validationField.js";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -99,7 +99,10 @@ export default function AddPostPage() {
   async function handleOnSubmit(values) {
     if (!isValid) return;
     try {
-      values.slug = slugify(values.slug || values.title);
+      values.slug = slugify(values.slug || values.title, { lower: true });
+
+      await isPostExisted(values.title, values.slug);
+
       values.image = image ? image.file.name : "";
       if (image) uploadImageToFirebase(image.file, ImagePaths.post);
       values.category = values.category?.value;
@@ -113,7 +116,7 @@ export default function AddPostPage() {
       reset();
       setImage(null);
     } catch (e) {
-      toast(e.message);
+      toast.error(e.message);
     }
   }
 
