@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db, getDocFromDB } from "@/firebase/firebase-config.js";
+import { db } from "@/firebase/firebase-config.js";
 import { StyledTableCell } from "@/components/table/StyledTable.js";
-import ManagePostStyledTableRow from "@/components/table/ManagePostStyledTableRow.jsx";
 import { LoadingSpinner } from "@/components/loading/index.js";
 import ManageCategoryStyledTableRow from "@/components/table/ManageCategoryStyledTableRow.jsx";
+import { Button } from "@/components/button/index.js";
 
 const rowsPerPage = 10;
 const initialQuery = query(
@@ -54,7 +54,7 @@ export default function ManageCategoriesPage() {
       setCategories(arr);
       setIsLoading(false);
     })();
-  }, [currentQuery]);
+  }, [currentQuery, isLoading]);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -62,6 +62,12 @@ export default function ManageCategoriesPage() {
     <>
       {categories.length > 0 ? (
         <>
+          <Button
+            to={"/manage/add-category"}
+            style={{ float: "right", width: "300px", marginBottom: "30px" }}
+          >
+            Add new
+          </Button>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="categories table">
               <TableHead>
@@ -79,6 +85,7 @@ export default function ManageCategoriesPage() {
                     page * rowsPerPage,
                     page * rowsPerPage + rowsPerPage,
                   )}
+                  refreshPage={() => setIsLoading(true)}
                 />
               </TableBody>
               <TableFooter></TableFooter>

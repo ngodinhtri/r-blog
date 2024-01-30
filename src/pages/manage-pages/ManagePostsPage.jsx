@@ -60,7 +60,9 @@ export default function ManagePostsPage() {
         post.createdAt = new Date(
           Number(post.createdAt.seconds) * 1000,
         ).toLocaleString("en-US");
-        post.category = await getDocFromDB("categories", post.category);
+        post.category = (await getDocFromDB("categories", post.category)) || {
+          name: "",
+        };
       }
 
       setPosts(arr);

@@ -92,6 +92,7 @@ const ManagePagesLayoutStyles = styled.div`
     grid-column: 2 / span 3;
     grid-row: 2 / span 1;
     overflow-y: auto;
+    padding: 20px;
   }
 `;
 
