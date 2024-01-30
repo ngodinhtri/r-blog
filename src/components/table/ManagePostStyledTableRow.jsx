@@ -3,6 +3,7 @@ import { StyledTableCell } from "@/components/table/StyledTable.js";
 import PropTypes from "prop-types";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { POST_STATUS } from "@/utils/constant.js";
 
 export default function ManagePostStyledTableRow({ data }) {
   return (
@@ -14,10 +15,10 @@ export default function ManagePostStyledTableRow({ data }) {
         >
           <StyledTableCell>{item.title}</StyledTableCell>
           <StyledTableCell align="right">
-            {item.status == 1
+            {item.status === POST_STATUS.approved
               ? "Approved"
-              : item.status == 2
-                ? "{Pending"
+              : item.status === POST_STATUS.pending
+                ? "Pending"
                 : "Reject"}
           </StyledTableCell>
           <StyledTableCell align="right">

@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "@/components/button/index.js";
 import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { CATEGORY_STATUS } from "@/utils/constant.js";
 
 const AddPostCategoryStyles = styled.div`
   h2 {
@@ -40,7 +41,7 @@ export default function AddCategoryPage() {
     defaultValues: {
       name: "",
       slug: "",
-      status: 2,
+      status: CATEGORY_STATUS.unapproved,
     },
     resolver: yupResolver(validationSchema),
   });
@@ -81,14 +82,18 @@ export default function AddCategoryPage() {
             <Label htmlFor="radio-buttons">Status</Label>
             <Controller
               render={({ field }) => (
-                <RadioGroup row defaultValue={2} {...field}>
+                <RadioGroup
+                  row
+                  defaultValue={CATEGORY_STATUS.unapproved}
+                  {...field}
+                >
                   <FormControlLabel
-                    value={1}
+                    value={CATEGORY_STATUS.approved}
                     control={<Radio />}
                     label="Approved"
                   />
                   <FormControlLabel
-                    value={2}
+                    value={CATEGORY_STATUS.unapproved}
                     control={<Radio />}
                     label="Unapproved"
                   />

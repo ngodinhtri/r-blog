@@ -7,9 +7,11 @@ import {
   limit,
   query,
   where,
+  and,
   orderBy,
 } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config.js";
+import { POST_STATUS } from "@/utils/constant.js";
 
 const FeaturePostsStyles = styled.div`
   display: grid;
@@ -25,7 +27,10 @@ export default function FeaturePostsHomePage() {
       const postsQuery = query(
         collection(db, "posts"),
         orderBy("createdAt", "desc"),
-        where("hot", "==", true),
+        and(
+          where("hot", "==", true),
+          where("status", "==", POST_STATUS.approved),
+        ),
         limit(3),
       );
 
