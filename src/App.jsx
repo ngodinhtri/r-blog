@@ -9,6 +9,7 @@ import DashboardPage from "@/pages/manage-pages/DashboardPage.jsx";
 import AddPostPage from "@/pages/manage-pages/AddPostPage.jsx";
 import ManagePostsPage from "@/pages/manage-pages/ManagePostsPage.jsx";
 import AddCategoryPage from "@/pages/manage-pages/AddCategoryPage.jsx";
+import ManageCategoriesPage from "@/pages/manage-pages/ManageCategoriesPage.jsx";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route path={"/manage/"} element={<DashboardPage />} />
           <Route path={"/manage/dashboard"} element={<DashboardPage />} />
           <Route path={"/manage/post"} element={<ManagePostsPage />} />
-          <Route path={"/manage/category"} element={<DashboardPage />} />
+          <Route path={"/manage/category"} element={<ManageCategoriesPage />} />
           <Route path={"/manage/user"} element={<DashboardPage />} />
           <Route path={"/manage/add-post"} element={<AddPostPage />} />
           <Route path={"/manage/add-category"} element={<AddCategoryPage />} />
