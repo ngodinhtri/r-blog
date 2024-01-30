@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { POST_STATUS } from "@/utils/constant.js";
+import { IconCellStyled } from "@/components/table/IconCellStyled.js";
 
 export default function ManagePostStyledTableRow({ data }) {
   return (
@@ -27,8 +28,12 @@ export default function ManagePostStyledTableRow({ data }) {
           <StyledTableCell align="right">{item.createdAt}</StyledTableCell>
           <StyledTableCell align="right">{item.category.name}</StyledTableCell>
           <StyledTableCell align="right">
-            <EditNoteOutlinedIcon fontSize={"small"} />
-            <DeleteOutlineOutlinedIcon fontSize={"small"} />
+            <IconCellStyled>
+              <EditNoteOutlinedIcon fontSize={"small"} />
+            </IconCellStyled>
+            <IconCellStyled>
+              <DeleteOutlineOutlinedIcon fontSize={"small"} />
+            </IconCellStyled>
           </StyledTableCell>
         </TableRow>
       ))}
@@ -38,4 +43,6 @@ export default function ManagePostStyledTableRow({ data }) {
 
 ManagePostStyledTableRow.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // handleEdit: PropTypes.func.isRequired,
+  // handleDelete: PropTypes.func.isRequired,
 };
