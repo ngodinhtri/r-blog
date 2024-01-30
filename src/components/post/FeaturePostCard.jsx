@@ -6,6 +6,7 @@ import { db } from "@/firebase/firebase-config.js";
 import { doc, getDoc } from "firebase/firestore";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { ImagePaths } from "@/firebase/ImagesPaths.js";
+import { CATEGORY_STATUS } from "@/utils/constant.js";
 
 const FeaturePostCardStyles = styled.div`
   & .post {
@@ -65,7 +66,10 @@ export default function FeaturePostCard({ post }) {
       // const authorRef = doc(db, "authors", authorId);
       // const authorSnap = await getDoc(authorRef);
 
-      if (categorySnap.exists()) {
+      if (
+        categorySnap.exists() &&
+        categorySnap.data()?.status === CATEGORY_STATUS.approved
+      ) {
         setCategory(categorySnap.data()?.name);
       }
 
@@ -95,7 +99,7 @@ export default function FeaturePostCard({ post }) {
         <Post.Image size={"l"} url={imageUrl} />
         <div className="intro">
           <div className="top">
-            <Post.Tag>{category}</Post.Tag>
+            <Post.Tag>{category || "Hot"}</Post.Tag>
             <Post.Info
               author={author}
               date={new Intl.DateTimeFormat("en-US", {

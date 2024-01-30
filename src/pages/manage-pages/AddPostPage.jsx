@@ -27,6 +27,7 @@ import * as Yup from "yup";
 import { validationField } from "@/firebase/validationField.js";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "@/contexts/useAuth.jsx";
+import { POST_STATUS } from "@/utils/constant.js";
 
 const validationSchema = Yup.object({
   title: validationField.title,
@@ -73,7 +74,7 @@ export default function AddPostPage() {
     defaultValues: {
       title: "",
       slug: "",
-      status: 2,
+      status: POST_STATUS.pending,
       category: "",
       image: "",
       hot: false,
@@ -201,17 +202,17 @@ export default function AddPostPage() {
               render={({ field }) => (
                 <RadioGroup row defaultValue={2} {...field}>
                   <FormControlLabel
-                    value={1}
+                    value={POST_STATUS.approved}
                     control={<Radio />}
                     label="Approved"
                   />
                   <FormControlLabel
-                    value={2}
+                    value={POST_STATUS.pending}
                     control={<Radio />}
                     label="Pending"
                   />
                   <FormControlLabel
-                    value={3}
+                    value={POST_STATUS.reject}
                     control={<Radio />}
                     label="Reject"
                   />

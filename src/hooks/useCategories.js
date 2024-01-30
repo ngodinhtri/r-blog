@@ -1,6 +1,7 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "@/firebase/firebase-config.js";
+import { CATEGORY_STATUS } from "@/utils/constant.js";
 
 export function useCategories() {
   const [categories, setCategories] = useState([]);
@@ -8,7 +9,11 @@ export function useCategories() {
   useEffect(() => {
     (async function getCategories() {
       const newArr = [];
-      const querySnapshot = await getDocs(collection(db, "categories"));
+      const q = query(
+        collection(db, "categories"),
+        where("status", "==", CATEGORY_STATUS.approved),
+      );
+      const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         newArr.push({ ...doc.data(), id: doc.id });
       });

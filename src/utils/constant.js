@@ -21,3 +21,13 @@ export const themeLight = {
   disabled: light.grey,
   error: light.red,
 };
+
+export const POST_STATUS = {
+  approved: 1,
+  pending: 2,
+  reject: 3,
+};
+export const CATEGORY_STATUS = {
+  approved: 1,
+  unapproved: 2,
+};
