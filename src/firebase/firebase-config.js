@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import {
+  and,
   collection,
   doc,
   getDoc,
@@ -58,11 +59,24 @@ export async function isPostExisted(title, slug) {
   if (!docSnaps.empty) throw new Error("Title or slug is existed");
 }
 
-export async function isCategoryExisted(name, slug) {
-  const q = query(
-    collection(db, "categories"),
-    or(where("name", "==", name), where("slug", "==", slug)),
-  );
+export async function isCategoryExisted(name, slug, exceptId = null) {
+  let q;
+
+  if (exceptId) {
+    q = query(
+      collection(db, "categories"),
+      and(
+        where("__name__", "!=", exceptId),
+        or(where("name", "==", name), where("slug", "==", slug)),
+      ),
+    );
+  } else {
+    q = query(
+      collection(db, "categories"),
+      or(where("name", "==", name), where("slug", "==", slug)),
+    );
+  }
+
   const docSnaps = await getDocs(q);
   if (!docSnaps.empty) throw new Error("Name or slug is existed");
 }

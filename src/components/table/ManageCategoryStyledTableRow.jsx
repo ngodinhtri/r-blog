@@ -8,8 +8,11 @@ import { IconCellStyled } from "@/components/table/IconCellStyled.js";
 import Swal from "sweetalert2";
 import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase-config.js";
+import { useNavigate } from "react-router-dom";
 
 export default function ManageCategoryStyledTableRow({ data, refreshPage }) {
+  const navigate = useNavigate();
+
   function handhandleDelete(categoryId) {
     Swal.fire({
       title: "Are you sure?",
@@ -41,14 +44,16 @@ export default function ManageCategoryStyledTableRow({ data, refreshPage }) {
         >
           <StyledTableCell>{item.name}</StyledTableCell>
           <StyledTableCell align="right">
-            {item.status == CATEGORY_STATUS.approved
+            {item.status === CATEGORY_STATUS.approved
               ? "Approved"
               : "Unapproved"}
           </StyledTableCell>
           <StyledTableCell align="right">{item.slug}</StyledTableCell>
           <StyledTableCell align="right">{item.createdAt}</StyledTableCell>
           <StyledTableCell align="right">
-            <IconCellStyled onClick={() => {}}>
+            <IconCellStyled
+              onClick={() => navigate(`/manage/update-category?id=${item.id}`)}
+            >
               <EditNoteOutlinedIcon fontSize={"small"} />
             </IconCellStyled>
             <IconCellStyled onClick={() => handhandleDelete(item.id)}>

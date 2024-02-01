@@ -15,16 +15,23 @@ import { StyledTableCell } from "@/components/table/StyledTable.js";
 import { LoadingSpinner } from "@/components/loading/index.js";
 import ManageCategoryStyledTableRow from "@/components/table/ManageCategoryStyledTableRow.jsx";
 import { Button } from "@/components/button/index.js";
+import { Input } from "@/components/input/";
+import styled from "styled-components";
+import { debounce } from "lodash";
 
 const rowsPerPage = 10;
-const initialQuery = query(
-  collection(db, "categories"),
-  orderBy("createdAt", "desc"),
-);
+
+const CategoriesHeaderStyled = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+`;
+
 export default function ManageCategoriesPage() {
   const [categories, setCategories] = useState([]);
-  const [currentQuery, setCurrentQuery] = useState(initialQuery);
   const [page, setPage] = useState(0);
+  const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   const handleChangePage = (event, newPage) => {
@@ -34,15 +41,19 @@ export default function ManageCategoriesPage() {
   useEffect(() => {
     (async function getCategories() {
       const arr = [];
+      const regex = new RegExp(search, "gi");
 
-      const categorySnapshots = await getDocs(currentQuery);
+      const categorySnapshots = await getDocs(
+        query(collection(db, "categories"), orderBy("createdAt", "desc")),
+      );
+
       categorySnapshots.forEach((doc) => {
         const category = {
           id: doc.id,
           ...doc.data(),
         };
 
-        arr.push(category);
+        if (category.name.match(regex)) arr.push(category);
       });
 
       for (let category of arr) {
@@ -54,7 +65,7 @@ export default function ManageCategoriesPage() {
       setCategories(arr);
       setIsLoading(false);
     })();
-  }, [currentQuery, isLoading]);
+  }, [isLoading, search]);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -62,12 +73,15 @@ export default function ManageCategoriesPage() {
     <>
       {categories.length > 0 ? (
         <>
-          <Button
-            to={"/manage/add-category"}
-            style={{ float: "right", width: "300px", marginBottom: "30px" }}
-          >
-            Add new
-          </Button>
+          <CategoriesHeaderStyled>
+            <Button to={"/manage/add-category"} style={{ width: "300px" }}>
+              Add new
+            </Button>
+            <Input
+              placeholder={"Search categories..."}
+              onChange={debounce((e) => setSearch(e.target.value), 500)}
+            />
+          </CategoriesHeaderStyled>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="categories table">
               <TableHead>
